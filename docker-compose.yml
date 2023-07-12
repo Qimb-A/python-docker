@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+
+  base:
+    build:
+      context: ./base
+    container_name: 'base'
+    image: 'base-image'
+    volumes:
+      - ./base/:/app/
+    environment:
+      - ENV_TYPE=compose
+    env_file:
+      - secrets.env
+
+  flask:
+    build:
+      context: ./flask
+    container_name: 'flask'
+    image: 'flask-image'
+    ports:
+#      - "6677:6677"
+      - "7766:6677"
+#    network_mode: host
+    volumes:
+      - ./flask/:/app/
+
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
