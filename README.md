@@ -43,6 +43,37 @@ docker run --name "base-python-1" --env ENV_TYPE=test --volume "/var/www/docker/
 
 ``-p "7766:6677"`` - відкритий назові порт в данному випадку порт з контейнера 6677 -> порт назовні 7766
 
+# docker start
+Команда для запуску зупиненного контейнеру
+```commandline
+docker start flask
+```
+# docker stop
+Команда для зупинки контейнеру
+```commandline
+docker stop flask
+```
+# docker logs
+Команда для відображення логів з контейнера, ``-f`` - для того щоб постійно відслідковувати
+```commandline
+docker logs -f flask
+```
+# docker restart
+Команда для перезапуску контейнера
+```commandline
+docker restart flask
+```
+
+# docker rm
+Команда для видалення контейнеру
+```commandline
+docker rm flask
+```
+# docker rmi
+Команда для видалення образу
+```commandline
+docker rm flask-image
+```
 # docker compose
 
 ```yml
@@ -65,3 +96,13 @@ services:
       - secrets.env # шлях до файла з зміниими оточеннями
 ```
 
+Команда для запуску сервіса з docker-compose.yml
+```commandline
+docker compose up -d --force-recreate flask
+```
+
+``-d`` - не зв'язувати консоль контейнера з запущенною консолью
+
+``--force-recreate`` - перестворювати контейнер у будь якому випадку
+
+``flask`` - назва сервісу для запуску
